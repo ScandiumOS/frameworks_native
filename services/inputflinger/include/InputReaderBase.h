@@ -183,6 +183,9 @@ struct InputReaderConfiguration {
         // The set of disabled input devices (disabledDevices) has changed.
         CHANGE_ENABLED_STATE = 1 << 9,
 
+        // Swap keys changed.
+        CHANGE_SWAP_KEYS = 1 << 20,
+
         // All devices must be reopened.
         CHANGE_MUST_REOPEN = 1 << 31,
     };
@@ -287,6 +290,8 @@ struct InputReaderConfiguration {
     // The set of currently disabled input devices.
     std::set<int32_t> disabledDevices;
 
+    // Swap back with recents button
+    bool swapKeys;
     InputReaderConfiguration()
           : virtualKeyQuietTime(0),
             pointerVelocityControlParameters(1.0f, 500.0f, 3000.0f,
@@ -307,7 +312,8 @@ struct InputReaderConfiguration {
             pointerGestureMovementSpeedRatio(0.8f),
             pointerGestureZoomSpeedRatio(0.3f),
             showTouches(false),
-            pointerCaptureRequest() {}
+            pointerCaptureRequest(),
+            swapKeys(false) {}
 
     static std::string changesToString(uint32_t changes);
 
